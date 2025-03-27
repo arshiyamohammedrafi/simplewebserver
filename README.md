@@ -1,5 +1,5 @@
 # EX01 Developing a Simple Webserver
-## Date:25.03.2025
+## Date:27.03.2025
 
 ## AIM:
 To develop a simple webserver to serve html pages and display the list of protocols in TCP/IP Protocol Suite.
@@ -23,8 +23,10 @@ Testing the webserver.
 
 ## PROGRAM:
 ```
-from http.server import HTTPServer, BaseHTTPRequestHandler
-content = '''
+from http.server import HTTPServer,BaseHTTPRequestHandler
+
+content='''
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,23 +60,28 @@ content = '''
     </table>
 </body>
 </html>
-```
-class myhandler(BaseHTTPRequestHandler):
+'''
+
+class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        print("request received")
-        self.send_response(200)
-        self.send_header('content-type', 'text/html; charset=utf-8')
+        print("Get request received...")
+        self.send_response(200) 
+        self.send_header("content-type", "text/html")       
         self.end_headers()
         self.wfile.write(content.encode())
-server_address = ('',8000)
-httpd = HTTPServer(server_address,myhandler)
-print("my webserver is running...")
-httpd.serve_forever()
 
+print("This is my webserver") 
+server_address =('',8000)
+httpd = HTTPServer(server_address,MyServer)
+httpd.serve_forever()
+```
 
 ## OUTPUT:
-![alt text](<Screenshot 2025-03-25 083234.png>)
-![alt text](<Screenshot 2025-03-25 083306.png>)
+![alt text](<Screenshot 2025-03-27 113758.png>)
+![alt text](<Screenshot 2025-03-27 113742.png>)
+
+
+
 
 
 
